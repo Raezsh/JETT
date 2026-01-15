@@ -49,10 +49,10 @@
           <div class="profile-menu">
 
             {% if request.user.role == "seeker" %}
-              <a href="{% url 'accounts:seeker_profile' %}">Profil</a>
+              <a href="{% url 'accounts:seeker_profile_view' %}">Profil</a>
               <a href="{% url 'applications:my_applications' %}">Lamaran Saya</a>
             {% elif request.user.role == "company" %}
-              <a href="{% url 'accounts:company_profile' %}">Profil</a>
+              <a href="{% url 'accounts:company_profile_view' %}">Profil</a>
             {% endif %}
 
             <a href="{% url 'accounts:logout' %}">Logout</a>

@@ -8,8 +8,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
       MYSQL_DATABASE: jett_db
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: adminpass
+      MYSQL_USER: django
+      MYSQL_PASSWORD: daunhijau433
     ports:
       - "3307:3306"
     command: --default-authentication-plugin=mysql_native_password
