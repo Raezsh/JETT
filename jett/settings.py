@@ -138,3 +138,34 @@ TEMPLATES = [
         },
     },
 ]
+
+# =========================
+# LOGGING (SIAP KE SIEM)
+# =========================
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+
+    "formatters": {
+        "jett_fmt": {
+            "format": "%(asctime)s JETT ACTION=%(message)s"
+        }
+    },
+
+    "handlers": {
+        "jett_file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": "/var/log/jett/application.log",
+            "formatter": "jett_fmt",
+        },
+    },
+
+    "loggers": {
+        "jett": {
+            "handlers": ["jett_file"],
+            "level": "INFO",
+            "propagate": False,
+        }
+    }
+}
