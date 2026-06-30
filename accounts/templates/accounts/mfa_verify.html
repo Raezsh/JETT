@@ -4,111 +4,12 @@
 {% block title %}Verifikasi Google Authenticator{% endblock %}
 
 {% block content %}
-<style>
-  .mfa-wrapper {
-    max-width: 420px;
-    margin: 80px auto;
-    padding: 20px;
-    font-family: 'Hanken Grotesk', sans-serif;
-  }
+<link rel="stylesheet" href="{% static 'css/mfa.css' %}">
 
-  .mfa-card {
-    background: #fff;
-    border-radius: 18px;
-    padding: 44px 40px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.08);
-    text-align: center;
-  }
-
-  .mfa-icon {
-    font-size: 3rem;
-    margin-bottom: 16px;
-  }
-
-  .mfa-card h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: #111;
-  }
-
-  .mfa-card .subtitle {
-    color: #666;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 32px;
-  }
-
-  .otp-input {
-    width: 100%;
-    padding: 18px;
-    font-size: 2rem;
-    letter-spacing: 12px;
-    text-align: center;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    outline: none;
-    margin-bottom: 16px;
-    transition: border-color 0.2s;
-    font-family: monospace;
-  }
-
-  .otp-input:focus {
-    border-color: #176ff2;
-    box-shadow: 0 0 0 3px rgba(23,111,242,0.1);
-  }
-
-  .btn-verify {
-    width: 100%;
-    padding: 14px;
-    background: #176ff2;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .btn-verify:hover {
-    background: #0f5bd8;
-  }
-
-  .btn-verify:disabled {
-    background: #aaa;
-    cursor: not-allowed;
-  }
-
-  .error-msg {
-    background: #fdecea;
-    color: #d32f2f;
-    font-size: 0.9rem;
-    padding: 10px 14px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    border-left: 3px solid #d32f2f;
-    text-align: left;
-  }
-
-  .back-link {
-    display: block;
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: #999;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .back-link:hover {
-    color: #333;
-  }
-</style>
-
+<div class="mfa-page">
 <div class="mfa-wrapper">
   <div class="mfa-card">
 
-    <div class="mfa-icon">🔐</div>
     <h1>Verifikasi Google Authenticator</h1>
     <p class="subtitle">
       Buka <strong>Google Authenticator</strong> di HP kamu dan masukkan
@@ -134,11 +35,12 @@
         required
       >
 
-      <button type="submit" class="btn-verify">Masuk</button>
+      <button type="submit" class="btn-mfa">Masuk</button>
     </form>
 
-    <a href="/" class="back-link">← Kembali ke halaman utama</a>
+    <a href="/" class="back-link">Kembali ke halaman utama</a>
 
   </div>
+</div>
 </div>
 {% endblock %}

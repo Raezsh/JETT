@@ -63,21 +63,18 @@
 
       {% if totp_active %}
         <p style="color: #2e7d32; font-weight: 600; margin-bottom: 14px;">
-          ✅ Google Authenticator Aktif
+          Google Authenticator Aktif
         </p>
-        <form method="POST" action="{% url 'accounts:mfa_disable' %}">
-          {% csrf_token %}
-          <button
-            type="submit"
-            onclick="return confirm('Yakin ingin menonaktifkan Google Authenticator? Akun kamu akan kurang aman.')"
-            style="padding: 10px 22px; background: #fdecea; color: #d32f2f; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem;"
-          >
-            Nonaktifkan MFA
-          </button>
-        </form>
+        <button
+          type="button"
+          onclick="document.getElementById('mfaDisableModal').style.display='flex'"
+          style="padding: 10px 22px; background: #fdecea; color: #d32f2f; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem;"
+        >
+          Nonaktifkan MFA
+        </button>
       {% else %}
         <p style="color: #f9a825; font-weight: 600; margin-bottom: 14px;">
-          ⚠️ Google Authenticator Belum Aktif
+          Google Authenticator Belum Aktif
         </p>
         <a
           href="{% url 'accounts:mfa_setup' %}"
@@ -91,4 +88,40 @@
   </div>
 
 </div>
+
+<!-- ===== MODAL DISABLE MFA (BUTUH VERIFIKASI OTP) ===== -->
+{% if totp_active %}
+<div id="mfaDisableModal" class="modal">
+  <div class="modal-content" style="max-width: 380px; text-align: center;">
+    <span class="close" onclick="document.getElementById('mfaDisableModal').style.display='none'">&times;</span>
+
+    <h2 style="margin-bottom: 10px;">Nonaktifkan MFA</h2>
+    <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px; line-height: 1.5;">
+      Demi keamanan, masukkan kode 6 digit dari Google Authenticator
+      untuk mengonfirmasi penonaktifan MFA.
+    </p>
+
+    <form method="POST" action="{% url 'accounts:mfa_disable' %}">
+      {% csrf_token %}
+      <input
+        type="text"
+        name="otp"
+        placeholder="000000"
+        maxlength="6"
+        inputmode="numeric"
+        autocomplete="one-time-code"
+        required
+        style="width: 100%; padding: 14px; font-size: 1.4rem; letter-spacing: 8px; text-align: center; border: 1px solid #cfcfcf; border-radius: 7px; margin-bottom: 16px; font-family: monospace;"
+      >
+      <button
+        type="submit"
+        style="width: 100%; padding: 12px; background: #d32f2f; color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.95rem;"
+      >
+        Konfirmasi Nonaktifkan
+      </button>
+    </form>
+  </div>
+</div>
+{% endif %}
+
 {% endblock %}

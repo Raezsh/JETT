@@ -4,62 +4,27 @@
 {% block title %}Link Kedaluwarsa{% endblock %}
 
 {% block content %}
-<style>
-  .expired-wrapper {
-    max-width: 440px;
-    margin: 100px auto;
-    padding: 20px;
-    font-family: 'Hanken Grotesk', sans-serif;
-    text-align: center;
-  }
+<link rel="stylesheet" href="{% static 'css/mfa.css' %}">
 
-  .expired-icon {
-    font-size: 3.5rem;
-    margin-bottom: 16px;
-  }
-
-  .expired-wrapper h1 {
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: #111;
-  }
-
-  .expired-wrapper p {
-    color: #666;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    margin-bottom: 28px;
-  }
-
-  .btn-home {
-    display: inline-block;
-    padding: 12px 28px;
-    background: #176ff2;
-    color: #fff;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: background 0.2s;
-  }
-
-  .btn-home:hover {
-    background: #0f5bd8;
-  }
-</style>
-
+<div class="mfa-page">
 <div class="expired-wrapper">
-  <div class="expired-icon">⏰</div>
-  <h1>Link Sudah Kedaluwarsa</h1>
-  <p>
-    Link yang kamu gunakan sudah tidak berlaku.
-    Link verifikasi email berlaku selama <strong>24 jam</strong>,
-    sedangkan link reset password berlaku selama <strong>1 jam</strong>.
-  </p>
-  <p>
-    Silakan kembali ke halaman utama dan lakukan permintaan ulang.
-  </p>
-  <a href="/" class="btn-home">Kembali ke Beranda</a>
+  <div class="expired-card">
+
+    <h1>Link Sudah Kedaluwarsa</h1>
+    <p>
+      Link yang kamu gunakan sudah tidak berlaku.
+    </p>
+    <p>
+      Link <strong>verifikasi email</strong> berlaku selama <strong>24 jam</strong>,
+      sedangkan link <strong>reset password</strong> berlaku selama <strong>1 jam</strong>.
+    </p>
+    <p>
+      Silakan kembali ke halaman utama dan lakukan permintaan ulang.
+    </p>
+
+    <a href="/" class="btn-expired">Kembali ke Beranda</a>
+
+  </div>
+</div>
 </div>
 {% endblock %}

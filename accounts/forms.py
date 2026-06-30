@@ -30,8 +30,17 @@ class RegisterSeekerForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data.get("email")
-        if CustomUser.objects.filter(email=email).exists():
-            raise forms.ValidationError("Email sudah digunakan.")
+
+        # ← FIX: hanya anggap "sudah digunakan" kalau user-nya aktif (sudah verifikasi)
+        existing_user = CustomUser.objects.filter(email=email).first()
+
+        if existing_user:
+            if existing_user.is_active:
+                raise forms.ValidationError("Email sudah digunakan.")
+            else:
+                # User lama belum verifikasi → hapus biar bisa register ulang
+                existing_user.delete()
+
         return email
 
     def clean(self):
@@ -84,8 +93,17 @@ class RegisterCompanyForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data.get("email")
-        if CustomUser.objects.filter(email=email).exists():
-            raise forms.ValidationError("Email sudah digunakan.")
+
+        # ← FIX: hanya anggap "sudah digunakan" kalau user-nya aktif (sudah verifikasi)
+        existing_user = CustomUser.objects.filter(email=email).first()
+
+        if existing_user:
+            if existing_user.is_active:
+                raise forms.ValidationError("Email sudah digunakan.")
+            else:
+                # User lama belum verifikasi → hapus biar bisa register ulang
+                existing_user.delete()
+
         return email
 
     def clean(self):

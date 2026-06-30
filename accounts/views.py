@@ -190,7 +190,7 @@ def _login_user(request, role):
                 pass
 
             # Belum setup TOTP → login dulu, lalu paksa setup
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return JsonResponse({"status": "setup_mfa"})
 
         return JsonResponse({"status": "error", "errors": form.errors})
@@ -224,10 +224,7 @@ def verify_email(request, token):
     verification.is_used = True
     verification.save()
 
-    login(request, user)
-
-    if user.role == "seeker":
-        return redirect("accounts:seeker_profile_setup")
+    login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 
     return redirect("accounts:company_profile_setup")
 
@@ -396,10 +393,8 @@ def mfa_verify(request):
                 # OTP valid → bersihkan session, login
                 del request.session["pre_mfa_user_id"]
                 del request.session["pre_mfa_role"]
-                login(request, user)
-
-                if role == "seeker":
-                    return redirect("jobs:job_list")
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                return redirect("jobs:job_list")
                 return redirect("jobs:employer_home")
             else:
                 return render(request, "accounts/mfa_verify.html", {
@@ -418,9 +413,18 @@ def mfa_verify(request):
 @login_required
 def mfa_disable(request):
     if request.method == "POST":
+        otp_input = request.POST.get("otp", "").strip()
+
         try:
-            request.user.totp_device.delete()
-            messages.success(request, "Google Authenticator berhasil dinonaktifkan.")
+            device = request.user.totp_device
+            totp = pyotp.TOTP(device.secret)
+
+            if totp.verify(otp_input, valid_window=1):
+                device.delete()
+                messages.success(request, "Google Authenticator berhasil dinonaktifkan.")
+            else:
+                messages.error(request, "Kode OTP salah. Google Authenticator tidak dinonaktifkan.")
+
         except TOTPDevice.DoesNotExist:
             pass
 
