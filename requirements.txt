@@ -1,0 +1,8 @@
+Django>=5.0
+python-dotenv>=1.0.0
+PyMySQL>=1.1.0
+django-axes>=6.0.0
+Pillow>=10.0.0
+cryptography>=41.0.0
+pyotp>=2.9.0
+qrcode>=7.4.2
