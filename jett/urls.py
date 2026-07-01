@@ -18,6 +18,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 
+# Custom error handlers
+handler404 = 'jett.views.custom_404'
+
 urlpatterns = [
     path('', include('landing.urls', namespace='landing')),
     path('accounts/', include('accounts.urls')),

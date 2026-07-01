@@ -20,33 +20,30 @@
         </div>
 
         <!-- Tanggal Lahir -->
-        <div class="input-group short">
+        <div class="input-group short {% if errors.date_of_birth %}input-error{% endif %}">
             <label>Tanggal Lahir <span style="color:#d32f2f;">*</span></label>
             <input type="date" name="date_of_birth"
-                   value="{{ seeker_profile.date_of_birth|date:'Y-m-d'|default:'' }}"
-                   style="{% if errors.date_of_birth %}border-color:#d32f2f;{% endif %}">
+                   value="{{ seeker_profile.date_of_birth|date:'Y-m-d'|default:'' }}">
             {% if errors.date_of_birth %}
                 <small style="color:#d32f2f;">{{ errors.date_of_birth }}</small>
             {% endif %}
         </div>
 
         <!-- Alamat -->
-        <div class="input-group">
+        <div class="input-group {% if errors.address %}input-error{% endif %}">
             <label>Alamat rumah <span style="color:#d32f2f;">*</span></label>
             <input type="text" name="address"
-                   value="{{ seeker_profile.address|default:'' }}"
-                   style="{% if errors.address %}border-color:#d32f2f;{% endif %}">
+                   value="{{ seeker_profile.address|default:'' }}">
             {% if errors.address %}
                 <small style="color:#d32f2f;">{{ errors.address }}</small>
             {% endif %}
         </div>
 
         <!-- Phone -->
-        <div class="input-group short">
+        <div class="input-group short {% if errors.phone %}input-error{% endif %}">
             <label>Nomor telepon <span style="color:#d32f2f;">*</span></label>
             <input type="text" name="phone" placeholder="08"
-                   value="{{ seeker_profile.phone|default:'' }}"
-                   style="{% if errors.phone %}border-color:#d32f2f;{% endif %}">
+                   value="{{ seeker_profile.phone|default:'' }}">
             {% if errors.phone %}
                 <small style="color:#d32f2f;">{{ errors.phone }}</small>
             {% endif %}
@@ -55,10 +52,9 @@
         <h3 class="section-title">Klasifikasi pilihan</h3>
 
         <!-- Pendidikan -->
-        <div class="input-group short">
+        <div class="input-group short {% if errors.education %}input-error{% endif %}">
             <label>Riwayat pendidikan terakhir <span style="color:#d32f2f;">*</span></label>
-            <select name="education"
-                    style="{% if errors.education %}border-color:#d32f2f;{% endif %}">
+            <select name="education">
                 <option value="">-- Pilih Pendidikan --</option>
                 {% for code, label in seeker_profile.EDUCATION_CHOICES %}
                     <option value="{{ code }}"

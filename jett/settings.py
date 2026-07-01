@@ -156,11 +156,6 @@ MIDDLEWARE = [
 ]
 
 # =========================
-# CUSTOM ERROR HANDLERS
-# =========================
-handler404 = 'jett.views.custom_404'
-
-# =========================
 # DJANGO-AXES (RATE LIMITING)
 # =========================
 AXES_FAILURE_LIMIT = 5

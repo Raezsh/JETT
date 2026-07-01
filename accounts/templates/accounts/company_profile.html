@@ -21,43 +21,39 @@
         </div>
 
         <!-- Nama Pemilik -->
-        <div class="input-group">
+        <div class="input-group {% if errors.owner_name %}input-error{% endif %}">
             <label>Nama Pemilik <span style="color:#d32f2f;">*</span></label>
             <input type="text" name="owner_name"
-                   value="{{ company_profile.owner_name|default:'' }}"
-                   style="{% if errors.owner_name %}border-color:#d32f2f;{% endif %}">
+                   value="{{ company_profile.owner_name|default:'' }}">
             {% if errors.owner_name %}
                 <small style="color:#d32f2f;">{{ errors.owner_name }}</small>
             {% endif %}
         </div>
 
         <!-- Alamat Perusahaan -->
-        <div class="input-group">
+        <div class="input-group {% if errors.address %}input-error{% endif %}">
             <label>Alamat Perusahaan <span style="color:#d32f2f;">*</span></label>
             <input type="text" name="address"
-                   value="{{ company_profile.address|default:'' }}"
-                   style="{% if errors.address %}border-color:#d32f2f;{% endif %}">
+                   value="{{ company_profile.address|default:'' }}">
             {% if errors.address %}
                 <small style="color:#d32f2f;">{{ errors.address }}</small>
             {% endif %}
         </div>
 
         <!-- Nomor Telepon -->
-        <div class="input-group short">
+        <div class="input-group short {% if errors.phone %}input-error{% endif %}">
             <label>Nomor Telepon Perusahaan <span style="color:#d32f2f;">*</span></label>
             <input type="text" name="phone"
-                   value="{{ company_profile.phone|default:'' }}" placeholder="08"
-                   style="{% if errors.phone %}border-color:#d32f2f;{% endif %}">
+                   value="{{ company_profile.phone|default:'' }}" placeholder="08">
             {% if errors.phone %}
                 <small style="color:#d32f2f;">{{ errors.phone }}</small>
             {% endif %}
         </div>
 
         <!-- Bidang Industri -->
-        <div class="input-group">
+        <div class="input-group {% if errors.industry %}input-error{% endif %}">
             <label>Bidang Industri <span style="color:#d32f2f;">*</span></label>
-            <select name="industry"
-                    style="{% if errors.industry %}border-color:#d32f2f;{% endif %}">
+            <select name="industry">
                 <option value="">-- Pilih Industri --</option>
                 {% for code, label in company_profile.INDUSTRY_CHOICES %}
                     <option value="{{ code }}"
@@ -72,10 +68,9 @@
         </div>
 
         <!-- Deskripsi Perusahaan -->
-        <div class="input-group">
+        <div class="input-group {% if errors.description %}input-error{% endif %}">
             <label>Deskripsi Perusahaan <span style="color:#d32f2f;">*</span></label>
-            <textarea name="description" rows="4"
-                      style="{% if errors.description %}border-color:#d32f2f;{% endif %}">{{ company_profile.description|default:'' }}</textarea>
+            <textarea name="description" rows="4">{{ company_profile.description|default:'' }}</textarea>
             {% if errors.description %}
                 <small style="color:#d32f2f;">{{ errors.description }}</small>
             {% endif %}
