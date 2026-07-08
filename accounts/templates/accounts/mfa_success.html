@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Google Authenticator Aktif{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/mfa.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal-verif.css' %}">
+
+<style>
+  #mfaSuccessModal .modal-content {
+    background: linear-gradient(180deg, #cce8ff 0%, #99cfff 100%);
+    border: 2px solid #007bff;
+    padding: 35px 30px;
+    width: 380px;
+    text-align: center;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    animation: slideDown 0.4s ease-out;
+  }
+
+  #mfaSuccessModal .modal-content h2 {
+    color: #004a99;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  #mfaSuccessModal .modal-content p {
+    font-size: 14px;
+    color: #002d66;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  #mfaSuccessModal .modal-content .mfa-success-icon {
+    font-size: 2.8rem;
+    margin-bottom: 14px;
+  }
+
+  #mfaSuccessModal .btn-continue {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    background-color: #007bff;
+    color: white;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+
+  #mfaSuccessModal .btn-continue:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<!-- AUTO SHOW MODAL -->
+<div id="mfaSuccessModal" class="modal" style="display: flex;">
+  <div class="modal-content">
+
+    <div class="mfa-success-icon">&#10003;</div>
+    <h2>Google Authenticator Aktif</h2>
+    <p>
+      Akun kamu sekarang dilindungi dengan verifikasi dua langkah.
+      Setiap login, kamu akan diminta memasukkan kode dari Google Authenticator.
+    </p>
+
+    <a href="{{ redirect_url }}" class="btn-continue">
+      Lanjutkan ke Dashboard
+    </a>
+
+  </div>
+</div>
+
+{% endblock %}

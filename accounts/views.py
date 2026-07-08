@@ -248,7 +248,6 @@ def seeker_profile(request):
         phone = request.POST.get("phone", "").strip()
         education = request.POST.get("education", "").strip()
 
-        # Validasi semua field wajib
         if not date_of_birth:
             errors["date_of_birth"] = "Tanggal lahir wajib diisi."
         if not address:
@@ -288,7 +287,6 @@ def company_profile(request):
         industry = request.POST.get("industry", "").strip()
         description = request.POST.get("description", "").strip()
 
-        # Validasi semua field wajib
         if not owner_name:
             errors["owner_name"] = "Nama pemilik wajib diisi."
         if not address:
@@ -372,11 +370,12 @@ def mfa_setup(request):
         if totp.verify(otp_input, valid_window=1):
             device.is_verified = True
             device.save()
-            messages.success(request, "Google Authenticator berhasil diaktifkan!")
 
-            if request.user.role == "seeker":
-                return redirect("jobs:job_list")
-            return redirect("jobs:employer_home")
+            # ← TAMBAHAN: tampilkan halaman sukses dulu sebelum ke dashboard
+            redirect_url = "/jobs/" if request.user.role == "seeker" else "/jobs/employer/"
+            return render(request, "accounts/mfa_success.html", {
+                "redirect_url": redirect_url
+            })
         else:
             return render(request, "accounts/mfa_setup.html", {
                 "qr_code": _generate_qr_code(request.user, device.secret),
